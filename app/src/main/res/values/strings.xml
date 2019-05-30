@@ -2,4 +2,7 @@
     <string name="app_name">Android Demo</string>
     <string name="channel_name">Look Away</string>
     <string name="channel_description">Notifications to remind user to look away from screen</string>
+    <string name="Apply">Remind Me!</string>
+    <string name="Interval">Interval</string>
+    <string name="Length">Length</string>
 </resources>

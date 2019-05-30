@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Apply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -17,7 +17,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:onClick="onClick"
-        android:text="Button"
+        android:text="@string/Apply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -36,12 +36,14 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Interval"
+        android:hint="@string/Interval"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/Length"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="number"
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/Length"
@@ -53,9 +55,11 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="96dp"
         android:ems="10"
-        android:hint="Length"
+        android:hint="@string/Length"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:autofillHints="number"
+        app:layout_constraintBottom_toTopOf="@+id/Apply"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:targetApi="o" />
 </android.support.constraint.ConstraintLayout>
