@@ -31,25 +31,25 @@ public class MainActivity extends AppCompatActivity {
         final int PROGRESS_CURRENT = 0;
         builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
 
-
-        // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(1, builder.build());
-
         new Thread(new Runnable() {
             public void run() {
                 // a potentially time consuming task
-                int i = 0;
-                while (i < PROGRESS_MAX){
-                    try {
-                        i += 1;
-                        Thread.sleep(1000);
-                        builder.setProgress(PROGRESS_MAX, i, false);
-                        builder.setContentText("Look 20 feet away for "+ (PROGRESS_MAX - i) + " seconds");
-                        builder.setOnlyAlertOnce(true);
-                        notificationManager.notify(1, builder.build());
 
+                int i = 0;
+                while (i < PROGRESS_MAX) try {
+                    if (i == 0) {
+                        Thread.sleep(5000);
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(1, builder.build());
                     }
-                    catch(InterruptedException ignored){}
+                    i += 1;
+                    Thread.sleep(1000);
+                    builder.setProgress(PROGRESS_MAX, i, false);
+                    builder.setContentText("Look 20 feet away for " + (PROGRESS_MAX - i) + " seconds");
+                    builder.setOnlyAlertOnce(true);
+                    notificationManager.notify(1, builder.build());
+
+                } catch (InterruptedException ignored) {
                 }
                 builder.setProgress(0, 0, false);
 
@@ -73,13 +73,14 @@ public class MainActivity extends AppCompatActivity {
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(notificationTitle)
             .setContentText(notificationContent)
-            .setPriority(NotificationCompat.PRIORITY_HIGH);
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setVibrate(new long[0]);
 
     private final NotificationCompat.Builder finishbuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("All Done!")
             .setContentText("Back to work!")
-            .setPriority(NotificationCompat.PRIORITY_HIGH);
+            .setPriority(NotificationCompat.PRIORITY_MAX);
 
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
